@@ -24,7 +24,7 @@ class _CatalogPageState extends State<CatalogPage> {
     {'label': 'Фрукт. лед', 'id': 'premium'},
   ];
 
-  String selectedCategoryId = 'popular'; // 🆕 состояние для активной категории
+  String selectedCategoryId = 'popular';
 
   @override
   void initState() {

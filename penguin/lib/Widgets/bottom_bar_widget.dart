@@ -42,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         BottomNavigationBarItem(
           icon: Image.asset(_iconPaths[3], width: 24, height: 24),
-          label: "корзина",
+          label: "Корзина",
         ),
       ],
       onTap: (int index) {
