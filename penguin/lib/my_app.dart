@@ -27,7 +27,6 @@ class _MyAppState extends State<MyApp> {
             primaryColor: const Color.fromRGBO(84, 170, 242, 1),
             useMaterial3: true,
           ),
-          // Обязательно передай child от ScreenUtilInit
         );
       },
     );

@@ -56,7 +56,6 @@ class _MapPageState extends State<MapPage> {
             initialScale: PhotoViewComputedScale.contained,
             backgroundDecoration: const BoxDecoration(color: Colors.white),
           ),
-          // Маркеры на карте
           ...markers.asMap().entries.map((entry) {
             final index = entry.key;
             final marker = entry.value;
@@ -69,23 +68,20 @@ class _MapPageState extends State<MapPage> {
             final markerX = marker.position.dx * screenWidth;
             final markerY = marker.position.dy * screenHeight;
 
-            // Размеры контейнера с адресом
             final infoWidth = 160.0;
             final infoHeight = 30.0;
 
-            // Проверяем, не выходит ли подсказка за правую границу
             final isOverflowingRight = (markerX + 45 + infoWidth) > screenWidth;
 
             double infoLeft =
                 isOverflowingRight
                     ? markerX -
                         infoWidth -
-                        0 // слева от маркера
-                    : markerX + 35; // справа от маркера
+                        0 
+                    : markerX + 35;
 
             double infoTop = markerY - (infoHeight / 1.4);
 
-            // Ограничиваем по вертикали, чтобы не уйти за верх/низ экрана
             infoTop = infoTop.clamp(0.0, screenHeight - infoHeight);
 
             return Stack(
@@ -96,7 +92,7 @@ class _MapPageState extends State<MapPage> {
                     top: infoTop,
                     child: _buildMarkerInfo(marker),
                   ),
-                // Маркер
+         
                 Positioned(
                   left: markerX,
                   top: markerY,

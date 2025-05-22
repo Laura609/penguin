@@ -40,17 +40,16 @@ class _SearchIceCreamBottomSheetState
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          // 🔍 TextField с голубым hintText и иконкой
           TextField(
             controller: _searchController,
             decoration: InputDecoration(
               hintText: 'Поиск мороженого...',
               hintStyle: const TextStyle(
-                color: Color.fromRGBO(84, 170, 242, 1), // ✅ Голубой хинт
+                color: Color.fromRGBO(84, 170, 242, 1),
               ),
               prefixIcon: const Icon(
                 Icons.search,
-                color: Color.fromRGBO(84, 170, 242, 1), // ✅ Голубая иконка
+                color: Color.fromRGBO(84, 170, 242, 1),
               ),
               border: const OutlineInputBorder(
                 borderSide: BorderSide.none,

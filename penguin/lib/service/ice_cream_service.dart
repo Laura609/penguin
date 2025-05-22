@@ -6,7 +6,6 @@ import 'package:penguin/models/ice_cream_model.dart';
 class IceCreamService {
   static const String basePath = 'ice_cream';
 
-  // Получение мороженого по группе
   static Future<List<IceCream>> getIceCreamsByGroup(String groupName) async {
     try {
       final snapshot = await FirebaseFirestore.instance
@@ -33,12 +32,10 @@ static Stream<List<IceCream>> streamSearchIceCreamByName(String searchTerm) {
         .collectionGroup('ice')
         .snapshots()
         .map((snapshot) {
-      // Получаем все документы
       final List<IceCream> results = snapshot.docs
           .map((doc) => IceCream.fromMap(doc.data(), doc.id))
           .toList();
 
-      // Фильтруем на стороне Dart по частичному совпадению
       final List<IceCream> filtered = results
           .where((item) =>
               item.name.toLowerCase().contains(query.toLowerCase()))
@@ -55,7 +52,6 @@ static Stream<List<IceCream>> streamSearchIceCreamByName(String searchTerm) {
   }
 }
 
-  // Поиск по имени (разовый запрос)
   static Future<List<IceCream>> searchIceCreamByName(String searchTerm) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance

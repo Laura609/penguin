@@ -108,7 +108,7 @@ Future<void> _removeFromCart() async {
   try {
     final docRef = FirebaseFirestore.instance
         .collection('Users')
-        .doc(user.email!) // <-- Здесь заменяем uid на email
+        .doc(user.email!)
         .collection('cart')
         .doc(widget.iceCream.name);
 

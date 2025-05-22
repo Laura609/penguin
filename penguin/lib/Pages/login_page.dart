@@ -43,9 +43,8 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (!mounted) return;
-      Navigator.of(context).pop(); // Закрываем диалог загрузки
+      Navigator.of(context).pop();
 
-      // Явная навигация на HomeRoute
       if (mounted) {
         context.router.replaceAll([const HomeRoute()]);
       }

@@ -29,7 +29,7 @@ class AppNavigator {
     return showGeneralDialog<T>(
       context: context,
       barrierDismissible: true,
-      barrierLabel: 'Dismiss', // Add this line
+      barrierLabel: 'Dismiss',
       barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (_, __, ___) => dialog,

@@ -31,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: const Color.fromRGBO(0, 4, 40, 1),
       body: Stack(
         children: [
-          // Top image
           Positioned(
             top: 0,
             left: 0,
@@ -45,7 +44,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // First text
           Positioned(
             top: screenHeight * 0.28,
             left: screenWidth * 0.1,
@@ -59,7 +57,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // Penguin image
           Positioned(
             top: screenHeight * 0.35,
             left: (screenWidth - screenWidth * 0.7) / 2,
@@ -73,7 +70,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // Second text
           Positioned(
             top: screenHeight * 0.70,
             left: (screenWidth - screenWidth * 0.4) / 2,
@@ -87,7 +83,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // Bottom image
           Positioned(
             bottom: 0,
             left: 0,
