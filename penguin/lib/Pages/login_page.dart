@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:penguin/Widgets/loading_widget.dart';
 import 'package:penguin/Widgets/text_input_widgets/email_textfield_widget.dart';
 import 'package:penguin/Widgets/text_input_widgets/password_textfield_widget.dart';
+import 'package:penguin/router/router.gr.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
- final _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final bool _isEmailTouched = false;
   final bool _isPasswordTouched = false;
@@ -42,7 +43,12 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (!mounted) return;
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(); // Закрываем диалог загрузки
+
+      // Явная навигация на HomeRoute
+      if (mounted) {
+        context.router.replaceAll([const HomeRoute()]);
+      }
 
     } on FirebaseAuthException catch (e) {
       Navigator.of(context).pop();
@@ -138,7 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: PasswordTextFieldWidget(
                       controller: _passwordController,
-                      isTouched: _isPasswordTouched, labelText: 'Пароль',
+                      isTouched: _isPasswordTouched, 
+                      labelText: 'Пароль',
                     ),
                   ),
                   const SizedBox(height: 30),

@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:penguin/Widgets/app_bar_widget.dart';
 import 'package:penguin/Widgets/bottom_bar_widget.dart';
+import 'package:penguin/Widgets/ice/ice_cream_group_list_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -21,12 +23,12 @@ class HomePage extends StatelessWidget {
           children: [
             // Реклама
             Container(
-              padding: const EdgeInsets.only(left: 30),
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(0, 4, 40, 1),
+              padding: EdgeInsets.only(left: 75.w),
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(0, 4, 40, 1),
               ),
               child: SizedBox(
-                height: 200,
+                height: 500.h,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -34,42 +36,37 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20),
-                          const Text(
+                          SizedBox(height: 50.h),
+                          Text(
                             'Мороженое для ваших улыбок',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 45.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          const Text(
+                          SizedBox(height: 25.h),
+                          Text(
                             'Самое натуральное мороженое от нашего пингвина порадует как взрослого, так и ребёнка',
-                            style: TextStyle(color: Colors.white, fontSize: 10),
+                            style: TextStyle(color: Colors.white, fontSize: 25.sp),
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 37.5.h),
                           SizedBox(
-                            width: 160,
-                            height: 30,
+                            width: 400.w,
+                            height: 75.h,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                foregroundColor: const Color.fromRGBO(
-                                  0,
-                                  4,
-                                  40,
-                                  1,
-                                ),
+                                foregroundColor: Color.fromRGBO(0, 4, 40, 1),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(25.r),
                                 ),
                               ),
                               onPressed: () {},
-                              child: const Text(
+                              child: Text(
                                 'Заказать',
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 30.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -78,10 +75,9 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     SizedBox(
-                      height: 220,
-                      width: 210,
+                      height: 550.h,
+                      width: 525.w,
                       child: Image.asset(
                         'assets/ice_cream_cone.png',
                         fit: BoxFit.fitWidth,
@@ -91,40 +87,41 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+
             // История
             SizedBox(
-              height: 220,
+              height: 590.h,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 30, top: 15),
+                      padding: EdgeInsets.only(left: 75.w, top: 37.5.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'История пингвина',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 16,
+                              fontSize: 45.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 6),
-                          const Text(
+                          SizedBox(height: 15.h),
+                          Text(
                             'Когда-то давным-давно один весёлый молочник нашёл на берегу океана одинокого пингвина, который был редкостью в тех краях. Местные жители приходили посмотреть на экзотическую птицу и вместе с тем покупали мороженое у того самого молочника. От чего пингвину стало весело и он стал помогать продавать. Даже через 200 лет мы сохранили уникальный рецепт мороженого, которое радует вас по сей день!',
-                            style: TextStyle(color: Colors.black, fontSize: 10),
+                            style: TextStyle(color: Colors.black, fontSize: 25.sp),
                           ),
                         ],
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 28),
+                    padding: EdgeInsets.only(top: 70.h),
                     child: SizedBox(
-                      height: 219,
-                      width: 187,
+                      height: 547.5.h,
+                      width: 467.5.w,
                       child: Image.asset(
                         'assets/penguin.png',
                         fit: BoxFit.fitWidth,
@@ -135,9 +132,27 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 30),
-           
-            
+            Padding(
+              padding: EdgeInsets.only(top: 40.h, bottom: 60.h, left: 35.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
+                    child: Text(
+                      'Популярное мороженое',
+                      style: TextStyle(
+                        fontSize: 45.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 37.5.h),
+                  const IceCreamGroupList(groupName: 'election_client'),
+                  SizedBox(height: 100.h),
+                ],
+              ),
+            ),
           ],
         ),
       ),

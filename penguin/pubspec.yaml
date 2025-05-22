@@ -24,6 +24,9 @@ dependencies:
   build_runner: ^2.4.15
   image_picker: ^1.1.2
   photo_view: ^0.15.0
+  fluttertoast: ^8.2.12
+  qr_flutter: ^4.1.0
+  flutter_screenutil: ^5.9.3
   
 
 dev_dependencies:

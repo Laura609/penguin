@@ -73,18 +73,49 @@ class CatalogRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.GradefulPage]
-class GradefulRoute extends _i12.PageRouteInfo<void> {
-  const GradefulRoute({List<_i12.PageRouteInfo>? children})
-    : super(GradefulRoute.name, initialChildren: children);
+class GradefulRoute extends _i12.PageRouteInfo<GradefulRouteArgs> {
+  GradefulRoute({
+    _i13.Key? key,
+    required String selectedAddress,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
+         GradefulRoute.name,
+         args: GradefulRouteArgs(key: key, selectedAddress: selectedAddress),
+         rawPathParams: {'selectedAddress': selectedAddress},
+         initialChildren: children,
+       );
 
   static const String name = 'GradefulRoute';
 
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i4.GradefulPage();
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<GradefulRouteArgs>(
+        orElse:
+            () => GradefulRouteArgs(
+              selectedAddress: pathParams.getString('selectedAddress'),
+            ),
+      );
+      return _i4.GradefulPage(
+        key: args.key,
+        selectedAddress: args.selectedAddress,
+      );
     },
   );
+}
+
+class GradefulRouteArgs {
+  const GradefulRouteArgs({this.key, required this.selectedAddress});
+
+  final _i13.Key? key;
+
+  final String selectedAddress;
+
+  @override
+  String toString() {
+    return 'GradefulRouteArgs{key: $key, selectedAddress: $selectedAddress}';
+  }
 }
 
 /// generated route for

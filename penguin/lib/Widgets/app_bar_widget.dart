@@ -21,31 +21,62 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.isBack = false,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: backgroundColor,
-      leading: isBack
-          ? IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => context.router.pop(),
+  double _calculateFontSize(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth < 375) {
+      return 20;
+    }
+    return 24;
+  }
+
+@override
+Widget build(BuildContext context) {
+  final fontSize = _calculateFontSize(context);
+
+  final hasLeftOrRightText = leftText.isNotEmpty || rightText.isNotEmpty;
+
+  return AppBar(
+    backgroundColor: backgroundColor,
+    leading: isBack
+        ? IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => context.router.pop(),
+          )
+        : null,
+    title: Container(
+      alignment: Alignment.center,
+      child: hasLeftOrRightText
+          ? Row(
+              mainAxisAlignment:
+                  showSignOutButton ? MainAxisAlignment.end : MainAxisAlignment.center,
+              children: [
+                Text(
+                  leftText,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 35),
+                  child: Image.asset(
+                    'assets/penguin.png',
+                    height: 100,
+                    width: 70,
+                  ),
+                ),
+                Text(
+                  rightText,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             )
-          : null,
-      title: Container(
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment:
-              showSignOutButton ? MainAxisAlignment.end : MainAxisAlignment.center,
-          children: [
-            Text(
-              leftText,
-              style: TextStyle(
-                color: textColor,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Padding(
+          : Padding(
               padding: const EdgeInsets.only(top: 35),
               child: Image.asset(
                 'assets/penguin.png',
@@ -53,32 +84,22 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 width: 70,
               ),
             ),
-            Text(
-              rightText,
-              style: TextStyle(
-                color: textColor,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+    ),
+    centerTitle: true,
+    actions: showSignOutButton
+        ? [
+            IconButton(
+              icon: Image.asset(
+                'assets/goOut.png',
+                height: 24,
+                width: 24,
               ),
+              onPressed: () => _signOut(context),
             ),
-          ],
-        ),
-      ),
-      centerTitle: true,
-      actions: showSignOutButton
-          ? [
-              IconButton(
-                icon: Image.asset(
-                  'assets/goOut.png',
-                  height: 24,
-                  width: 24,
-                ),
-                onPressed: () => _signOut(context),
-              ),
-            ]
-          : [],
-    );
-  }
+          ]
+        : [],
+  );
+}
 
   Future<void> _signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();

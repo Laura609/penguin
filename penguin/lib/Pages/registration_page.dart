@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:penguin/Widgets/loading_widget.dart';
 import 'package:penguin/Widgets/register_button_widget.dart';
 import 'package:penguin/Widgets/text_input_widgets/email_textfield_widget.dart';
 import 'package:penguin/Widgets/text_input_widgets/login_textfield_widget.dart';
@@ -72,15 +73,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
     });
 
     if (_isFormValid) {
-       try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const LoadingWidget(),
+      );
+
+      try {
         // Регистрация пользователя в Firebase
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
 
-
-        // Сохранение данных в Firestore с использованием UID как ID документа
+        // Сохранение данных в Firestore
         await FirebaseFirestore.instance
             .collection('Users')
             .doc(_emailController.text.trim())
@@ -91,11 +97,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
           'created_at': FieldValue.serverTimestamp(),
         });
 
-        // После успешной регистрации
+        if (!mounted) return;
+        Navigator.of(context).pop(); // Закрываем диалог загрузки
+
+        // Явная навигация на HomeRoute
         if (mounted) {
-          context.router.replace(const HomeRoute());
+          context.router.replaceAll([const HomeRoute()]);
         }
       } on FirebaseAuthException catch (e) {
+        if (mounted) Navigator.of(context).pop();
+        
         String errorMessage = 'Ошибка регистрации. Попробуйте снова позже.';
         if (e.code == 'email-already-in-use') {
           errorMessage = 'Этот email уже используется. Попробуйте другой.';
@@ -112,6 +123,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           );
         }
       } catch (e) {
+        if (mounted) Navigator.of(context).pop();
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -120,12 +132,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
         }
       }
     } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text("Пожалуйста, заполните все поля правильно.")),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Пожалуйста, заполните все поля правильно.")),
+      );
     }
   }
 
@@ -226,9 +236,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       const Text(
                         'Уже есть аккаунт? ',
                         style: TextStyle(
-                          color: Color.fromRGBO(168, 168, 168, 1),
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 15,
                         ),
                       ),
                       GestureDetector(
@@ -237,8 +246,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           'Войти',
                           style: TextStyle(
                             color: Color.fromRGBO(84, 170, 242, 1),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            decoration: TextDecoration.underline,
                           ),
                         ),
                       ),
